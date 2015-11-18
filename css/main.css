@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial';
+
+}
+.wrapper {
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.top-menu {
+    height: 27px;
+    width: 100%;
+    border: solid 2px black;
+    line-height: 27px;
+}
+
+
+.top-menu__row {
+    float: left;
+    list-style: none;
+    padding: 0;
+
+}
+
+.top-menu__elem {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.game__cell {
+    width: 94px;
+    height: 94px;
+    border: solid 2px black;
+    margin: 3px;
+    float: left;
+    font-size: 110px;
+    text-align: center;
+    line-height: 98px;
+    color:#0097A7;
+}
+
+.game__field {
+    margin: 0 auto;
+    width: 312px;
+}
+.game__field::after{
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+    box-sizing: border-box;
+}
+
+.game {
+    padding-top: 25px;
+}
+
+.scoreboard {
+    padding-top: 25px;
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+    font-weight: bold;
+}
+.tic{
+    background-image: url(/image/tic.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.tac{
+    background-image: url(/image/tac.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
