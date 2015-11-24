@@ -9,8 +9,10 @@
 
     <!-- Bootstrap -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="lib/jquery-ui.min.css" rel="stylesheet">
     <link href="/css/reset.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,8 +25,8 @@
     <div class="wrapper">
         <div class="top-menu">
             <ul class="top-menu__row">
-                <li class="top-menu__elem">New Game</li>
-                <li class="top-menu__elem">Mode</li>
+                <li class="top-menu__elem top-menu__new-game">New Game</li>
+                <li class="top-menu__elem top-menu__mode">Mode</li>
             </ul>
         </div>
         <div class="game">
@@ -40,13 +42,17 @@
                 <div class="game__cell"></div>
             </div>
             <div class="scoreboard">
-                <p>You <span id="playerScore">1</span>:<span id="cpuScore">1</span> CPU</p>
+                <p><span class="scoreboard__player1"> Player1 <span id="playerFirstScore">1</span></span>:<span class="scoreboard__player2"> <span id="playerSecondScore">1</span> Player2</span></p>
             </div>
         </div>
     </div>
-
+<div id="dialog" title="Game over">
+	<p>New Game - clear Score <br>Continue - collect score</p>
+</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="js/game.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
   </body>

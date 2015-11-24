@@ -22,7 +22,7 @@ body {
 
 }
 
-.top-menu__elem {
+.top-menu__elem{
     float: left;
     margin-left: 20px;
     margin-right: 20px;
@@ -63,6 +63,9 @@ body {
     width: 300px;
     text-align: center;
     font-weight: bold;
+}
+.scoreboard__hightlight{
+    background-color: coral;
 }
 .tic{
     background-image: url(/image/tic.jpg);
