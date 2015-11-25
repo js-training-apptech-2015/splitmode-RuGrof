@@ -194,7 +194,6 @@ function GameLayout(gameTicTac) {
     this.playerSecondScoreboard = $('.scoreboard__player2');
     this.playerFirstScore = $('#playerFirstScore');
     this.playerSecondScore = $('#playerSecondScore');
-    this.dialogGameOver = $('#dialog');
     this.turn = 'X';
     // y=Math.floor(index/3) x=index%3
     this.gameField = function (x, y) {
@@ -234,7 +233,7 @@ GameLayout.prototype.render = function () {
     this.playerFirstScore.text(this.game.playerFirstScore);
     this.playerSecondScore.text(this.game.playerSecondScore);
     if (this.game.state === STATE_END_GAME) {
-        this.dialogGameOver.dialog('open');
+        $('#game-over-dialog').modal('show');
     }
 }
 
@@ -258,27 +257,16 @@ $(function () {
             console.log($(this).index());
         });
     });
+    $("#new-game-btn").on('click', function () {
+        $('#game-over-dialog').modal('hide');
+        game.newGame();
+        layout.render();
 
-    $("#dialog").dialog({
-        autoOpen: false,
-        width: 400,
-        buttons: [
-            {
-                text: "New game",
-                click: function () {
-                    game.newGame();
-                    layout.render();
-                    $(this).dialog("close");
-                }
-		},
-            {
-                text: "Continue game",
-                click: function () {
-                    game.continueGame();
-                    layout.render();
-                    $(this).dialog("close");
-                }
-		}
-	]
+    });
+    $("#continue-btn").on('click', function () {
+        $('#game-over-dialog').modal('hide');
+        game.continueGame();
+        layout.render();
+
     });
 });
