@@ -16,65 +16,111 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="top-menu">
-            <ul class="top-menu__row">
-                <li class="top-menu__elem top-menu__new-game">New Game</li>
-                <li class="top-menu__elem top-menu__mode">Mode</li>
-            </ul>
+<div class="wrapper">
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li>
+                <button type="button" class="btn btn-default navbar-btn">New Game</button>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Mode <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Network Game</li>
+                    <li><a id="create-Game" href="#">Create Game</a></li>
+                    <li><a id="join-Game" href="#">Join Game</a></li>
+                </ul>
+            </li>
+            <p class="navbar-text"> You token Game: <span id="token-game">Local Game</span></p>
+        </ul>
+    </nav>
+    <div class="game">
+        <div class="game__field">
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
+            <div class="game__cell"></div>
         </div>
-        <div class="game">
-            <div class="game__field">
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-                <div class="game__cell"></div>
-            </div>
-            <div class="scoreboard">
-                <p><span class="scoreboard__player1"> Player1 <span id="playerFirstScore">0</span></span>:<span class="scoreboard__player2"> <span id="playerSecondScore">0</span> Player2</span>
-                </p>
-            </div>
+        <div class="scoreboard">
+            <p><span class="scoreboard__player1"> Player1 <span id="playerFirstScore">0</span></span>:<span
+                    class="scoreboard__player2"> <span id="playerSecondScore">0</span> Player2</span>
+            </p>
         </div>
     </div>
-    <div id="game-over-dialog" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Game over</h4>
-                </div>
-                <div class="modal-body">
-                    <p>New Game - clear Score</p>
-                    <p>Continue - collect score</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="new-game-btn">New Game</button>
-                    <button type="button" class="btn btn-primary" id="continue-btn">Continue</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
+    <div id="game-xhr-progress" class="progress fade">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100"
+             aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            <span class="sr-only">45% Complete</span>
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+</div>
+<div id="game-over-dialog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Game over</h4>
+            </div>
+            <div class="modal-body">
+                <p>New Game - clear Score</p>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <p>Continue - collect score</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="new-game-btn">New Game</button>
+                <button type="button" class="btn btn-primary" id="continue-btn">Continue</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="game-join-dialog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Join game</h4>
+            </div>
+            <div class="modal-body">
+                <p>Enter game token for joining to game</p>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="js/game.js"></script>
+                <div class="input-group">
+                      <span class="input-group-btn">
+                        <button id="join-game-button" class="btn btn-default" type="button">Go!</button>
+                      </span>
+                    <input id="join-game-token" type="text" class="form-control" placeholder="Game Token">
+                </div><!-- /input-group -->
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/game.js"></script>
 </body>
 
 </html>
