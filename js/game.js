@@ -467,6 +467,12 @@ $(function () {
         layout.render();
 
     });
+    $("#navbar-new-game").on('click', function () {
+        $('#game-over-dialog').modal('hide');
+        game.newGame();
+        layout.render();
+
+    });
     $("#continue-btn").on('click', function () {
         $('#game-over-dialog').modal('hide');
         game.continueGame();
